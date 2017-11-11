@@ -21,8 +21,8 @@ https://itunes.apple.com/us/app/id1132624266
 ## How to install and run on desktops
 
 ```
-:; go get github.com/hajimehoshi/go-invation
-:; cd $GOPATH/src/github.com/hajimehoshi/go-invation
+:; go get github.com/hajimehoshi/go-inovation
+:; cd $GOPATH/src/github.com/hajimehoshi/go-inovation
 :; go run main.go
 ```
 
