@@ -15,6 +15,9 @@ import (
 	"github.com/hajimehoshi/go-inovation/ino/internal/draw"
 	"github.com/hajimehoshi/go-inovation/ino/internal/input"
 	"github.com/hajimehoshi/go-inovation/ino/internal/lang"
+
+	"strconv"
+	"strings"
 )
 
 type Game struct {
@@ -36,10 +39,12 @@ func (g *Game) SetTransparent() {
 }
 
 func (g *Game) Layout(outsideWidth, outsideHeight int) (int, int) {
-	return ScreenWidth, ScreenHeight
+	return ScreenWidth*2, ScreenHeight*2
 }
 
 func (g *Game) Update() error {
+	return nil
+
 	if g.resourceLoadedCh != nil {
 		select {
 		case err := <-g.resourceLoadedCh:
@@ -116,6 +121,14 @@ func (g *Game) Update() error {
 }
 
 func (g *Game) Draw(screen *ebiten.Image) {
+	ids := ebiten.AppendGamepadIDs(nil)
+	if len(ids) > 0 {
+		ebitenutil.DebugPrint(screen, gamepadTest(ids[0]))
+	} else {
+		ebitenutil.DebugPrint(screen, "no gamepad")
+	}
+	return
+
 	if g.resourceLoadedCh != nil {
 		ebitenutil.DebugPrint(screen, "Now Loading...")
 		return
@@ -153,4 +166,86 @@ func NewGame() (*Game, error) {
 	}
 
 	return game, nil
+}
+
+var standardButtonToString = map[ebiten.StandardGamepadButton]string{
+	ebiten.StandardGamepadButtonRightBottom:      "RB",
+	ebiten.StandardGamepadButtonRightRight:       "RR",
+	ebiten.StandardGamepadButtonRightLeft:        "RL",
+	ebiten.StandardGamepadButtonRightTop:         "RT",
+	ebiten.StandardGamepadButtonFrontTopLeft:     "FTL",
+	ebiten.StandardGamepadButtonFrontTopRight:    "FTR",
+	ebiten.StandardGamepadButtonFrontBottomLeft:  "FBL",
+	ebiten.StandardGamepadButtonFrontBottomRight: "FBR",
+	ebiten.StandardGamepadButtonCenterLeft:       "CL",
+	ebiten.StandardGamepadButtonCenterRight:      "CR",
+	ebiten.StandardGamepadButtonLeftStick:        "LS",
+	ebiten.StandardGamepadButtonRightStick:       "RS",
+	ebiten.StandardGamepadButtonLeftBottom:       "LB",
+	ebiten.StandardGamepadButtonLeftRight:        "LR",
+	ebiten.StandardGamepadButtonLeftLeft:         "LL",
+	ebiten.StandardGamepadButtonLeftTop:          "LT",
+	ebiten.StandardGamepadButtonCenterCenter:     "CC",
+}
+
+func gamepadTest(id ebiten.GamepadID) string {
+	var str string
+	var standard string
+	if ebiten.IsStandardGamepadLayoutAvailable(id) {
+		standard = " (Standard Layout)"
+	}
+
+	maxAxis := ebiten.GamepadAxisCount(id)
+	var axes []string
+	for a := 0; a < maxAxis; a++ {
+		v := ebiten.GamepadAxisValue(id, a)
+		axes = append(axes, fmt.Sprintf("%d:%+0.2f", a, v))
+	}
+
+	maxButton := ebiten.GamepadButton(ebiten.GamepadButtonCount(id))
+	var pressedButtons []string
+	for b := ebiten.GamepadButton(id); b < maxButton; b++ {
+		if ebiten.IsGamepadButtonPressed(id, b) {
+			pressedButtons = append(pressedButtons, strconv.Itoa(int(b)))
+		}
+	}
+
+	str += fmt.Sprintf("Gamepad (ID: %d, SDL ID: %s)%s:\n", id, ebiten.GamepadSDLID(id), standard)
+	str += fmt.Sprintf("  Name:    %s\n", ebiten.GamepadName(id))
+	str += fmt.Sprintf("  Axes:    %s\n", strings.Join(axes, ","))
+	str += fmt.Sprintf("  Buttons: %s\n", strings.Join(pressedButtons, ","))
+
+	str += "\n"
+	if ebiten.IsStandardGamepadLayoutAvailable(id) {
+		m := `       [FBL ]                    [FBR ]
+       [FTL ]                    [FTR ]
+
+       [LT  ]       [CC  ]       [RT  ]
+    [LL  ][LR  ] [CL  ][CR  ] [RL  ][RR  ]
+       [LB  ]                    [RB  ]
+             [LS  ]       [RS  ]
+`
+
+		for b, str := range standardButtonToString {
+			placeholder := "[" + str + strings.Repeat(" ", 4-len(str)) + "]"
+			v := ebiten.StandardGamepadButtonValue(id, b)
+			switch {
+			case !ebiten.IsStandardGamepadButtonAvailable(id, b):
+				m = strings.Replace(m, placeholder, "  --  ", 1)
+			case ebiten.IsStandardGamepadButtonPressed(id, b):
+				m = strings.Replace(m, placeholder, fmt.Sprintf("[%0.2f]", v), 1)
+			default:
+				m = strings.Replace(m, placeholder, fmt.Sprintf(" %0.2f ", v), 1)
+			}
+		}
+
+		// TODO: Use ebiten.IsStandardGamepadAxisAvailable
+		m += fmt.Sprintf("    Left Stick:  X: %+0.2f, Y: %+0.2f\n    Right Stick: X: %+0.2f, Y: %+0.2f\n--",
+			ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisLeftStickHorizontal),
+			ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisLeftStickVertical),
+			ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisRightStickHorizontal),
+			ebiten.StandardGamepadAxisValue(id, ebiten.StandardGamepadAxisRightStickVertical))
+		str += m
+	}
+	return str
 }
