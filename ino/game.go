@@ -48,6 +48,7 @@ func (g *Game) Update() error {
 			}
 			g.resourceLoadedCh = nil
 		default:
+			return nil
 		}
 	}
 
