@@ -1,6 +1,6 @@
 module github.com/hajimehoshi/go-inovation
 
-go 1.17
+go 1.18
 
 require (
 	github.com/hajimehoshi/bitmapfont/v2 v2.2.3

@@ -1,5 +1,4 @@
 //go:build ebitencbackend
-// +build ebitencbackend
 
 package main
 

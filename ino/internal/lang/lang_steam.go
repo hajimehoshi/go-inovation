@@ -1,5 +1,4 @@
 //go:build !js && steam
-// +build !js,steam
 
 package lang
 
