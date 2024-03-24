@@ -3,7 +3,7 @@ module github.com/hajimehoshi/go-inovation
 go 1.18
 
 require (
-	github.com/hajimehoshi/bitmapfont/v2 v2.2.3
+	github.com/hajimehoshi/bitmapfont/v3 v3.0.0
 	github.com/hajimehoshi/ebiten/v2 v2.7.0-alpha.9
 	github.com/hajimehoshi/go-steamworks v0.0.0-20231029064622-d8bdd4105652
 	golang.org/x/image v0.15.0

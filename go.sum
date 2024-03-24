@@ -6,9 +6,8 @@ github.com/ebitengine/oto/v3 v3.2.0-alpha.4 h1:aaUdcbEDUV1oErHDv/Cd0IAjQaQPChZuv
 github.com/ebitengine/oto/v3 v3.2.0-alpha.4/go.mod h1:JtMbxJHZBDXfS8BmVYwzWk9Z6r7jsjwsHzOuZrEkfs4=
 github.com/ebitengine/purego v0.7.0-alpha.1 h1:Dlm9jM2kuzVQS89S1AALkDZQquow/Bbn3KVG68tFtWU=
 github.com/ebitengine/purego v0.7.0-alpha.1/go.mod h1:ah1In8AOtksoNK6yk5z1HTJeUkC1Ez4Wk2idgGslMwQ=
-github.com/hajimehoshi/bitmapfont/v2 v2.2.3 h1:jmq/TMNj352V062Tr5e3hAoipkoxCbY1JWTzor0zNps=
-github.com/hajimehoshi/bitmapfont/v2 v2.2.3/go.mod h1:sWM8ejdkGSXaQGlZcegMRx4DyEPOWYyXqsBKIs+Yhzk=
 github.com/hajimehoshi/bitmapfont/v3 v3.0.0 h1:r2+6gYK38nfztS/et50gHAswb9hXgxXECYgE8Nczmi4=
+github.com/hajimehoshi/bitmapfont/v3 v3.0.0/go.mod h1:+CxxG+uMmgU4mI2poq944i3uZ6UYFfAkj9V6WqmuvZA=
 github.com/hajimehoshi/ebiten/v2 v2.7.0-alpha.9 h1:chJcQurrHBgHJ93W5YLsmFIRMNR8EUZF5ZGF9VVG1Nc=
 github.com/hajimehoshi/ebiten/v2 v2.7.0-alpha.9/go.mod h1:zwIlC9BqOvxWoNEZioumSqv8q51KoZvv9NqeWvuD2GY=
 github.com/hajimehoshi/go-steamworks v0.0.0-20231029064622-d8bdd4105652 h1:O/lhZQ3VhbGjj1iSVtw85MyQuKVW5BKEg7RE37U9a1Q=

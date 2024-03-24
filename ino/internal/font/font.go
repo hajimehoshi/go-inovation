@@ -4,7 +4,7 @@ import (
 	"image/color"
 	"strings"
 
-	"github.com/hajimehoshi/bitmapfont/v2"
+	"github.com/hajimehoshi/bitmapfont/v3"
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/text"
 	"golang.org/x/image/font"
@@ -50,19 +50,15 @@ func Height(str string) int {
 var red = color.RGBA{0xe4, 0x32, 0x60, 0xff}
 
 func DrawText(target *ebiten.Image, str string, x, y int, clr color.Color) {
-	// Adjust position for 'dot' position.
-	const (
-		dx = 3
-		dy = 12
-	)
 	fx := fixed.I(x)
 	fy := fixed.I(y)
+	h := bitmapfont.Face.Metrics().Ascent.Floor()
 	for i, t := range tokens(str) {
 		clr := clr
 		if i%2 == 1 {
 			clr = red
 		}
-		text.Draw(target, t, bitmapfont.Face, fx.Round()+dx, fy.Round()+dy, clr)
+		text.Draw(target, t, bitmapfont.Face, fx.Round(), fy.Round()+h, clr)
 		fx += font.MeasureString(bitmapfont.Face, t)
 	}
 }
