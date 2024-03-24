@@ -1,7 +1,7 @@
-//go:build android || ios
+//go:build !android && !ios
 
 package input
 
 func isTouchPrimaryInput() bool {
-	return true
+	return false
 }
