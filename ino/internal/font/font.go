@@ -6,7 +6,7 @@ import (
 
 	"github.com/hajimehoshi/bitmapfont/v3"
 	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/text"
+	"github.com/hajimehoshi/ebiten/v2/text/v2"
 	"golang.org/x/image/font"
 	"golang.org/x/image/math/fixed"
 )
@@ -49,16 +49,20 @@ func Height(str string) int {
 
 var red = color.RGBA{0xe4, 0x32, 0x60, 0xff}
 
+var face = text.NewGoXFace(bitmapfont.Face)
+
 func DrawText(target *ebiten.Image, str string, x, y int, clr color.Color) {
-	fx := fixed.I(x)
-	fy := fixed.I(y)
-	h := bitmapfont.Face.Metrics().Ascent.Floor()
+	xf := float64(x)
+	yf := float64(y)
 	for i, t := range tokens(str) {
 		clr := clr
 		if i%2 == 1 {
 			clr = red
 		}
-		text.Draw(target, t, bitmapfont.Face, fx.Round(), fy.Round()+h, clr)
-		fx += font.MeasureString(bitmapfont.Face, t)
+		op := &text.DrawOptions{}
+		op.GeoM.Translate(xf, yf)
+		op.ColorScale.ScaleWithColor(clr)
+		text.Draw(target, t, face, op)
+		xf += text.Advance(t, face)
 	}
 }
