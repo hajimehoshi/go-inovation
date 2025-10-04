@@ -16,8 +16,8 @@ github.com/hajimehoshi/bitmapfont/v3 v3.3.0 h1:KUVwvYndITE354fC4Mia2S6wNe7Fdw7ko
 github.com/hajimehoshi/bitmapfont/v3 v3.3.0/go.mod h1:xr0I489RlJqH1gmliAbPQjcRvMPp+uk/UCqKk1SMmx8=
 github.com/hajimehoshi/bitmapfont/v4 v4.1.0 h1:eE3qa5Do4qhowZVIHjsrX5pYyyPN6sAFWMsO7QREm3U=
 github.com/hajimehoshi/bitmapfont/v4 v4.1.0/go.mod h1:/PD+aLjAJ0F2UoQx6hkOfXqWN7BkroDUMr5W+IT1dpE=
-github.com/hajimehoshi/ebiten/v2 v2.8.8 h1:xyMxOAn52T1tQ+j3vdieZ7auDBOXmvjUprSrxaIbsi8=
-github.com/hajimehoshi/ebiten/v2 v2.8.8/go.mod h1:durJ05+OYnio9b8q0sEtOgaNeBEQG7Yr7lRviAciYbs=
+github.com/hajimehoshi/ebiten/v2 v2.8.9 h1:qUkI++Dq5Jzcwio5vOIZj6kAkzvei9S3X9zrUJIKJDA=
+github.com/hajimehoshi/ebiten/v2 v2.8.9/go.mod h1:2W03LiNMJj7+mFtYbnZlSLoxovd2bpg4FzQR0pZhzAA=
 github.com/hajimehoshi/go-steamworks v0.0.0-20250707080550-ea9c0844b066 h1:2B8n4Bfc52b2nEeYLY/HBWftLTfb85Xyjnn+m1RLLdk=
 github.com/hajimehoshi/go-steamworks v0.0.0-20250707080550-ea9c0844b066/go.mod h1:uH8briHytZKfL1MqTd0zJIrQ+jWvxSmrxxUqRmf55lY=
 github.com/jezek/xgb v1.1.1 h1:bE/r8ZZtSv7l9gk6nU0mYx51aXrvnyb44892TwSaqS4=

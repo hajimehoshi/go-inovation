@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/hajimehoshi/bitmapfont/v4 v4.1.0
-	github.com/hajimehoshi/ebiten/v2 v2.8.8
+	github.com/hajimehoshi/ebiten/v2 v2.8.9
 	github.com/hajimehoshi/go-steamworks v0.0.0-20250707080550-ea9c0844b066
 	golang.org/x/image v0.31.0
 	golang.org/x/text v0.29.0
